@@ -11,10 +11,10 @@ st.set_page_config(page_title="🎬 Movie Success Predictor", layout="centered")
 st.title("🎬 Movie Success Predictor")
 
 # User input
-budget = st.number_input("💰 Budget (USD)", value=100000000)
-duration = st.number_input("🎞️ Duration (minutes)", value=120)
-year = st.number_input("📅 Release Year", value=2025)
-cast_size = st.number_input("👥 Cast Size", value=5)
+budget = st.number_input("💰 Budget (USD)", min_value=0)
+duration = st.number_input("🎞️ Duration (minutes)", min_value=0)
+year = st.number_input("📅 Release Year", min_value=2000)
+cast_size = st.number_input("👥 Cast Size", min_value=1)
 director_fame = st.slider("⭐ Director Fame (0–10)", 0.0, 10.0, 5.0)
 
 genres = [

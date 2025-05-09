@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎬 Movie Success Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='loading.js') }}" defer></script>
+</head>
+<body>
+  <div class="container">
+    <h1>🎥 Predict Your Movie’s Success</h1>
+
+    <form id="prediction-form" method="POST">
+      <input type="number" name="budget" placeholder="Budget (USD)" required>
+      <input type="number" name="duration" placeholder="Duration (mins)" required>
+      <input type="number" name="title_year" placeholder="Release Year" required>
+      <input type="number" name="cast_size" placeholder="Cast Size" required>
+      <input type="number" step="0.1" name="director_fame" placeholder="Director Fame (0-10)" required>
+
+      <select name="genre" required>
+        <option disabled selected>-- Select Genre --</option>
+        {% for genre in [
+          "Action", "Comedy", "Drama", "Horror", "Adventure", "Romance", "Thriller",
+          "Biography", "Crime", "Animation", "Fantasy", "Mystery", "Sci-Fi",
+          "Musical", "War", "Western", "History", "Sport", "Music", "Film-Noir",
+          "Family", "Documentary", "News"] %}
+          <option value="{{ genre }}">{{ genre }}</option>
+        {% endfor %}
+      </select>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div class="loader" id="loader"></div>
+
+    {% if prediction %}
+      <div class="result {{ 'hit' if prediction == 'Hit' else 'flop' }}">
+        🎯 Prediction: <strong>{{ prediction }}</strong>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
